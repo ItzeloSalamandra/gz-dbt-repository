@@ -1,5 +1,3 @@
-with ship_source as (
-    select * from {{ source('raw', 'ship') }}
 ),
 
 renamed as (
