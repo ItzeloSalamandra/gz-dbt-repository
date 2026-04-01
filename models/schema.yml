@@ -3,17 +3,25 @@ version: 2
 sources:
   - name: raw
     database: quiet-seer-299408
-    schema: "{{ env_var('RAW_DATASET', 'gz_raw_data') }}"
+    schema: gz_raw_data
     loader: bigquery
-    description: adding tables
     config:
-      freshness:
-        warn_after: {count: 12, period: hour}
-        error_after: {count: 24, period: hour}
+     freshness:
+      warn_after: {count: 90, period: day}
+      loaded_at_field: "CAST(date_date AS TIMESTAMP)"  # o el campo que indique cuándo se cargó
     tables:
       - name: sales
         identifier: raw_gz_sales
-      - name: product
-        identifier: raw_gz_product
-      - name: ship
-        identifier: raw_gz_ship
+        description: sales of Greenweez / we have one row per product_id found in each orders_id
+        columns:
+          - name: date_date
+            description: date of purchase
+          - name: orders_id
+            description: foreign key to ship
+          - name: pdt_id
+            description: foreign key to product
+          - name: revenue
+            description: the amount paid by the customer to purchase the product. revenue = quantity * selling_price
+          - name: quantity
+            description: the quantity of products purchased for a given order
+      # ... (el resto de las tablas sigue igual)   
