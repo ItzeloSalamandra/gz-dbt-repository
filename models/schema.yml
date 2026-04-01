@@ -10,7 +10,7 @@ sources:
       loaded_at_field: "CAST(date_date AS TIMESTAMP)"
     tables:
       - name: sales
-        identifier: raw_gz__sales
+        identifier: raw_gz_sales
         description: sales of Greenweez / we have one row per product_id found in each orders_id
         config:
           freshness:
@@ -37,7 +37,7 @@ sources:
                   - pdt_id   
 
       - name: product
-        identifier: raw_gz__product
+        identifier: raw_gz_product
         description: products of Greenweez
         columns:
           - name: products_id
@@ -49,7 +49,7 @@ sources:
               - not_null
 
       - name: ship
-        identifier: raw_gz__ship
+        identifier: raw_gz_ship
         description: shipping data for Greenweez orders
         columns:
           - name: orders_id
