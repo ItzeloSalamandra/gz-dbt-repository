@@ -40,3 +40,10 @@ models:
     # Applies to all files under models/mart
     mart:
       +materialized: table
+
+models:
+  my_new_project:
+    mart:
+      finance:
+        +schema: finance
+        +materialized: table
