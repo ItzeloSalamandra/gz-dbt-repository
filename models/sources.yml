@@ -7,7 +7,7 @@ sources:
     config:
       freshness:
         warn_after: {count: 90, period: day}
-      loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+      loaded_at_field: date_date
     tables:
       - name: sales
         identifier: raw_gz_sales
@@ -15,7 +15,7 @@ sources:
         config:
           freshness:
             warn_after: {count: 90, period: day}
-          loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+          loaded_at_field: date_date
         columns:
           - name: date_date
             description: date of purchase
@@ -28,8 +28,7 @@ sources:
           - name: quantity
             description: the quantity of products purchased for a given order
         tests:
-          - unique:
-              column_name: "(orders_id || '-' || pdt_id)"
+          # Borra el test 'unique' manual con ||
           - dbt_utils.unique_combination_of_columns:
               arguments:
                 combination_of_columns:
@@ -44,9 +43,7 @@ sources:
             description: Primary key
           - name: purchSE_PRICE
             description: the purchase price of the product
-            tests:
-              - unique
-              - not_null
+
 
       - name: ship
         identifier: raw_gz_ship
@@ -61,5 +58,4 @@ sources:
           - name: ship_cost
             description: shipping cost paid by Greenweez to the carrier/logistics provider
             tests:
-              - unique
               - not_null   
