@@ -42,8 +42,7 @@ sources:
         columns:
           - name: products_id
             description: Primary key
-          - name: purchase_price
-            identifier: purchSE_PRICE
+          - name: purchSE_PRICE
             description: the purchase price of the product
             tests:
               - unique
