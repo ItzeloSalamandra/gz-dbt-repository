@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw  # Este es el primer argumento de tu función source()
+    tables:
+      - name: product
+      - name: sales
+      - name: ship
