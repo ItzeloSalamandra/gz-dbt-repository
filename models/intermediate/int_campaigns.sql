@@ -1,12 +1,12 @@
 -- models/int_campaigns.sql
 with union_campaigns as (
-    SELECT * FROM {{ ref('stg_raw_adwords') }} -- Un solo guion
+    SELECT * FROM {{ ref('stg_raw__adwords') }} -- Un solo guion
     UNION ALL
-    SELECT * FROM {{ ref('stg_raw_bing') }}
+    SELECT * FROM {{ ref('stg_raw__bing') }}
     UNION ALL
-    SELECT * FROM {{ ref('stg_raw_facebook') }}
+    SELECT * FROM {{ ref('stg_raw__facebook') }}
     UNION ALL
-    SELECT * FROM {{ ref('stg_raw_criteo') }}
+    SELECT * FROM {{ ref('stg_raw__criteo') }}
 )
 
 select * from union_campaigns
