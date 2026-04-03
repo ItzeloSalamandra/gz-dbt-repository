@@ -11,24 +11,19 @@ sources:
     tables:
       - name: sales
         identifier: raw_gz_sales
-        description: sales of Greenweez / we have one row per product_id found in each orders_id
+        description: "sales of Greenweez / we have one row per product_id found in each orders_id"
         config:
           freshness:
             warn_after: {count: 90, period: day}
           loaded_at_field: date_date
         columns:
           - name: date_date
-            description: date of purchase
+            description: "date of purchase"
           - name: orders_id
-            description: foreign key to ship
           - name: pdt_id
-            description: foreign key to product
           - name: revenue
-            description: the amount paid by the customer to purchase the product. revenue = quantity * selling_price
           - name: quantity
-            description: the quantity of products purchased for a given order
         tests:
-          # Borra el test 'unique' manual con ||
           - dbt_utils.unique_combination_of_columns:
               arguments:
                 combination_of_columns:
@@ -37,106 +32,66 @@ sources:
 
       - name: product
         identifier: raw_gz_product
-        description: products of Greenweez
+        description: "products of Greenweez"
         columns:
           - name: products_id
-            description: Primary key
-          - name: purchSE_PRICE
-            description: the purchase price of the product
-
+            description: "Primary key"
 
       - name: ship
         identifier: raw_gz_ship
-        description: shipping data for Greenweez orders
+        description: "shipping data for Greenweez orders"
         columns:
           - name: orders_id
-            description: Primary key
-          - name: shipping_fee
-            description: the price the customer pays for shipping
-          - name: log_cost
-            description: the cost of preparing the parcel in the distribution centre/warehouse
+            description: "Primary key"
           - name: ship_cost
-            description: shipping cost paid by Greenweez to the carrier/logistics provider
             tests:
               - not_null   
 
-
       - name: adwords
         identifier: raw_gz_adwords
-        description: marketing adworks
+        description: "marketing adwords"
         columns:
           - name: date_date
-            description: date of the purchase
           - name: paid_source
-            description: paid source  
           - name: campaign_key
-            description: 
           - name: camPGN_name
-            description: price of the purchase 
           - name: ads_cost
-            description: 
           - name: impression
-            description: 
           - name: click
-            description: 
-
 
       - name: bing
         identifier: raw_gz_bing
-        description: marketing bing
+        description: "marketing bing"
         columns:
           - name: date_date
-            description: date of the purchase
           - name: paid_source
-            description: paid source  
           - name: campaign_key
-            description: 
           - name: camPGN_name
-            description: price of the purchase 
           - name: ads_cost
-            description: 
           - name: impression
-            description: 
           - name: click
-            description: 
-
 
       - name: criteo
         identifier: raw_gz_criteo
-        description: marketing criteo
+        description: "marketing criteo"
         columns:
           - name: date_date
-            description: date of the purchase
           - name: paid_source
-            description: paid source  
           - name: campaign_key
-            description: 
           - name: camPGN_name
-            description: price of the purchase 
           - name: ads_cost
-            description: 
           - name: impression
-            description: 
           - name: click
-            description: 
-
 
       - name: facebook
         identifier: raw_gz_facebook
-        description: marketing facebook
+        description: "marketing facebook"
         columns:
           - name: date_date
-            description: date of the purchase
           - name: paid_source
-            description: paid source  
           - name: campaign_key
-            description: 
           - name: camPGN_name
-            description: price of the purchase 
           - name: ads_cost
-            description: 
           - name: impression
-            description: 
           - name: click
-            description: 
 

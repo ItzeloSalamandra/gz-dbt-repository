@@ -1,18 +1,16 @@
 {{ config(materialized='table') }}
 
 with source as (
-    select * from {{ source('raw', 'criteo') }} -- Cambia esto por bing, facebook o criteo según el archivo
+    select * from {{ source('raw', 'criteo') }}
 ),
 
 renamed as (
     select
-        -- Creamos o traemos la llave de la campaña
         concat(paid_source, '_', camPGN_name) as campaign_key,
         date_date,
         paid_source,
-        campaign_key
-        camPGN_name as campaign_name, -- Renombrado solicitado
-        CAST(ads_cost AS float64) as ads_cost, -- Cast solicitado
+        camPGN_name as campaign_name,
+        cast(ads_cost as float64) as ads_cost,
         impression,
         click
     from source
