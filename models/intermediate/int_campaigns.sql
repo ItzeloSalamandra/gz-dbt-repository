@@ -1,12 +1,10 @@
--- models/int_campaigns.sql
-with union_campaigns as (
-    SELECT * FROM {{ ref('stg_raw__adwords') }}
-    UNION ALL
-    SELECT * FROM {{ ref('stg_raw__bing') }}
-    UNION ALL
-    SELECT * FROM {{ ref('stg_raw__facebook') }}
-    UNION ALL
-    SELECT * FROM {{ ref('stg_raw__criteo') }}
-)
+{{ config(materialized='table') }}
 
-select * from union_campaigns
+{{ dbt_utils.union_relations(
+    relations=[
+        ref('stg_raw__adwords'),
+        ref('stg_raw__bing'),
+        ref('stg_raw__criteo'),
+        ref('stg_raw__facebook')
+    ]
+) }}
